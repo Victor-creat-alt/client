@@ -1,0 +1,77 @@
+/* DepartmentForm.css */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #000; /* Black background */
+  padding: 20px;
+  border-radius: 8px;
+  width: 550px;
+  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3);
+  text-align: center;
+}
+
+h2 {
+  color: #000; /* Black heading */
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+input {
+  width: 85%;
+  padding: 10px;
+  margin: 5px 0 5px 5%; /* Moves input slightly more to the left */
+  border: 1px solid #fff;
+  border-radius: 5px;
+  background: #333;
+  color: #fff;
+  font-size: 16px;
+}
+
+input::placeholder {
+  color: #aaa;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.submit-button,
+.close-button {
+  width: 48%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s ease-in-out;
+}
+
+.submit-button {
+  background: #4CAF50; /* Green */
+  color: #fff;
+}
+
+.close-button {
+  background: #d32f2f; /* Red */
+  color: #fff;
+}
+
+.submit-button:hover {
+  background: #388E3C;
+}
+
+.close-button:hover {
+  background: #b71c1c;
+}

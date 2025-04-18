@@ -1,0 +1,92 @@
+/* EnrolledStudents.css */
+
+.enrolled-students-page {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    background: linear-gradient(135deg, #e0f7fa, #c2e9f2);
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+.page-title {
+    text-align: center;
+    color: #007BFF;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.enrolled-students-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+}
+
+.enrolled-student-card {
+    background: linear-gradient(145deg, #81d4fa, #4fc3f7);
+    border-radius: 12px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1),
+                -5px -5px 15px rgba(255, 255, 255, 0.7);
+    padding: 2rem;
+    width: 350px;
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.enrolled-student-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.15),
+                -8px -8px 20px rgba(255, 255, 255, 0.8);
+}
+
+.course-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.student-name, .course-title, .course-description {
+    color: #2c3e50;
+    margin: 1rem 0;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.student-name strong, .course-title strong, .course-description strong {
+    color: #1a237e;
+    font-weight: 600;
+}
+
+.remove-btn {
+    background-color: #e53935;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.remove-btn:hover {
+    background-color: #d32f2f;
+    transform: scale(1.05);
+}
+
+.loading-message {
+    text-align: center;
+    color: #007BFF;
+    font-size: 1.2rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .enrolled-student-card {
+        width: 90%;
+    }
+}

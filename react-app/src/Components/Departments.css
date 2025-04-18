@@ -1,0 +1,147 @@
+/* General Styling for the Form Container */
+.form-container {
+  margin: 15px auto; /* Center the form container horizontally */
+  padding: 15px;
+  background-color: #2a5d78; /* Light background for the form section */
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Slightly smaller shadow */
+  max-width: 500px; /* Limit the width of the form container */
+}
+
+/* Form Input Fields */
+.form-container input {
+  display: block;
+  width: calc(100% - 18px); /* Reduced width for a medium size, adjust for padding */
+  margin: 8px 0;
+  padding: 9px;
+  font-size: 14px; /* Slightly smaller font size */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Buttons Styling */
+.form-container button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: #007BFF;
+  color: white;
+  font-size: 14px; /* Slightly smaller font size */
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: block; /* Make button a block element */
+  width: 100%; /* Make button full width of form */
+  text-align: center; /* Center text inside button */
+}
+
+.form-container button:hover {
+  background-color: #0056b3; /* Darker blue for hover effect */
+}
+
+/* Styling for Headers */
+.form-container h2 {
+  font-size: 20px; /* Reduced font size */
+  font-weight: bold;
+  color: white; /* Dark text for readability */
+  border-bottom: 2px solid white; /* Underline for separation */
+  padding-bottom: 8px;
+  text-align: center; /* Center the heading */
+}
+
+/* Search Input Styling */
+.search-input {
+  display: block;
+  width: 300px;
+  max-width: 100%;
+  margin: 15px 0;
+  padding: 10px 14px;
+  font-size: 16px;
+  border: 2px solid #007BFF;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #0056b3;
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+/* Departments Table Styling */
+.departments-table {
+  width: 80%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.departments-table th,
+.departments-table td {
+  border: 1px solid #007BFF;
+  padding: 12px 15px;
+  width: 33.33%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.departments-table th {
+  background-color: #0056b3;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+}
+
+.departments-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.departments-table tr:hover {
+  background-color: #e0e7ff;
+  cursor: pointer;
+}
+
+/* Delete Button Styling */
+.delete-button {
+  background-color: #e63946; /* Vibrant red */
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #b22234;
+}
+
+/* Add Department Button Styling */
+.add-department-button {
+  background-color: #1d4ed8; /* Vibrant blue */
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 8px rgba(29, 78, 216, 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.add-department-button:hover {
+  background-color: #2563eb;
+  box-shadow: 0 6px 12px rgba(37, 99, 235, 0.6);
+}
