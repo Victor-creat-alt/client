@@ -28,13 +28,22 @@ const LoginSignup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Always include userType in the payload!
-    const data = {
-      name: formData.name,
-      email: formData.email,
-      password: formData.password,
-      userType: userType,
-    };
+    // Prepare data payload based on action
+    let data;
+    if (action === 'login') {
+      data = {
+        email: formData.email,
+        password: formData.password,
+        userType: userType,
+      };
+    } else {
+      data = {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        userType: userType,
+      };
+    }
 
     try {
       if (action === 'login') {
@@ -72,7 +81,7 @@ const LoginSignup = () => {
         error.response.data &&
         error.response.data.error === 'Invalid credentials'
       ) {
-        alert('Invalid email, name, or password.');
+        alert('Invalid email or password.');
       } else {
         alert('An error occurred. Please try again.');
       }
@@ -86,17 +95,19 @@ const LoginSignup = () => {
   // Reusable form inputs to avoid duplication
   const FormInputs = () => (
     <>
-      <div className="input-box">
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-        <FaUser className="icon" />
-      </div>
+      {action === 'register' && (
+        <div className="input-box">
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+          <FaUser className="icon" />
+        </div>
+      )}
       <div className="input-box">
         <input
           type="email"
@@ -129,10 +140,10 @@ const LoginSignup = () => {
           <form onSubmit={handleSubmit}>
             <h1>{userType === 'student' ? 'Student Login' : 'Instructor Login'}</h1>
             <FormInputs />
-            <button type="submit">Login</button>
+            <button type="submit">{action === 'login' ? 'Login' : 'Register'}</button>
             <div className="register-link">
               <p>
-                Don't have an account?{' '}
+                {action === 'login' ? "Don't have an account?" : 'Already have an account?'}{' '}
                 <a
                   href="#"
                   onClick={(e) => {
@@ -140,29 +151,7 @@ const LoginSignup = () => {
                     toggleAction();
                   }}
                 >
-                  Register
-                </a>
-              </p>
-            </div>
-          </form>
-        </div>
-
-        <div className="form-box register">
-          <form onSubmit={handleSubmit}>
-            <h1>{userType === 'student' ? 'Student Registration' : 'Instructor Registration'}</h1>
-            <FormInputs />
-            <button type="submit">Register</button>
-            <div className="register-link">
-              <p>
-                Already have an account?{' '}
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggleAction();
-                  }}
-                >
-                  Login
+                  {action === 'login' ? 'Register' : 'Login'}
                 </a>
               </p>
             </div>
