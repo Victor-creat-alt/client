@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 function EnrolledStudents() {
     const [enrolledStudents, setEnrolledStudents] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
-    const API_BASE_URL = '/api';
+    const API_BASE_URL = import.meta.env.VITE_API_URL;
     const navigate = useNavigate();
 
     const handleBackClick = () => {

@@ -19,7 +19,7 @@ const LoginSignup = () => {
     });
 
     const userType = location.state?.userType || 'student';
-    const baseUrl = '/api';
+    const baseUrl = import.meta.env.VITE_API_URL;
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });

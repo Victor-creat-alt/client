@@ -18,7 +18,7 @@ const Dashboard = () => {
     const [instructors, setInstructors] = useState([]);
     const [departments, setDepartments] = useState([]);
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const API_BASE_URL = "/api";
+    const API_BASE_URL = import.meta.env.VITE_API_URL;
     const location = useLocation();
     const navigate = useNavigate();
 

@@ -10,7 +10,7 @@ function Departments() {
   const [departments, setDepartments] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const API_BASE_URL = "/api";
+  const API_BASE_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
   const handleBackClick = () => {
