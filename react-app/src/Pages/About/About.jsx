@@ -40,7 +40,7 @@ At Tech Academy, we are committed to helping you unlock your potential and thriv
           {/* Testimonial 1 */}
           <div className="testimonial-card">
             <div className="testimonial-image">
-              <img src="/assets/Alimage.jpg" alt="Student 1" />
+              <img src="/assets/AIimage.jpg" alt="Student 1" />
             </div>
             <div className="testimonial-content">
               <p className="testimonial-text">"Tech Academy gave me the confidence to transition into a career in data science. The hands-on approach and expert instructors made complex concepts easy to understand. Thanks to their support, I landed my first data analyst job within months!"</p>
@@ -52,7 +52,7 @@ At Tech Academy, we are committed to helping you unlock your potential and thriv
           {/* Testimonial 2 */}
           <div className="testimonial-card">
             <div className="testimonial-image">
-              <img src="/assets/Alimage2.jpeg" alt="Student 2" />
+              <img src="/assets/AIimage2.jpeg" alt="Student 2" />
             </div>
             <div className="testimonial-content">
               <p className="testimonial-text">"I came to Tech Academy with no coding experience, and now I'm a web developer at a top tech company. The course structure and real-world projects helped me build the skills I needed to succeed. I couldn’t have asked for a better start!"</p>
@@ -64,7 +64,7 @@ At Tech Academy, we are committed to helping you unlock your potential and thriv
           {/* Testimonial 3 */}
           <div className="testimonial-card">
             <div className="testimonial-image">
-              <img src="/assets/Alimage3.png" alt="Student 3" />
+              <img src="/assets/AIimage3.png" alt="Student 3" />
             </div>
             <div className="testimonial-content">
               <p className="testimonial-text">"The cybersecurity course at Tech Academy opened doors to a new career path I hadn’t even considered. The curriculum was comprehensive, and the industry connections helped me secure an internship right after graduation."</p>
