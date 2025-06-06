@@ -28,55 +28,57 @@ const LoginSignup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const url = userType === 'student' ? '/students' : '/instructors';
+        // Always include userType in the payload!
         const data = {
             name: formData.name,
             email: formData.email,
-            password:formData.password,
+            password: formData.password,
+            userType: userType,
         };
 
         try {
-        if (action === 'login') {
-            // POST to /login
-            const response = await axios.post(`${baseUrl}/login`, data);
-            const user = response.data;
-            setAuthState({ studentId: user.id, userType: user.userType });
-            alert('Successfully logged in.');
-            if (userType === 'student') {
-                navigate('/home');
+            if (action === 'login') {
+                // POST to /login
+                const response = await axios.post(`${baseUrl}/login`, data);
+                const user = response.data;
+                setAuthState({ studentId: user.id, userType: user.userType });
+                alert('Successfully logged in.');
+                if (userType === 'student') {
+                    navigate('/home');
+                } else {
+                    navigate('/dashboard');
+                }
             } else {
-                navigate('/dashboard');
+                // POST to /signup
+                const response = await axios.post(`${baseUrl}/signup`, data);
+                const user = response.data;
+                setAuthState({ studentId: user.id, userType: user.userType });
+                alert('Registration successful.');
+                if (userType === 'student') {
+                    navigate('/home');
+                } else {
+                    navigate('/dashboard');
+                }
             }
-        } else {
-            // POST to /signup
-            const response = await axios.post(`${baseUrl}/signup`, data);
-            const user = response.data;
-            setAuthState({ studentId: user.id, userType: user.userType });
-            alert('Registration successful.');
-            if (userType === 'student') {
-                navigate('/home');
+        } catch (error) {
+            if (
+                error.response &&
+                error.response.data &&
+                error.response.data.error === 'Email already exists'
+            ) {
+                alert('Email already exists. Please use a different email.');
+            } else if (
+                error.response &&
+                error.response.data &&
+                error.response.data.error === 'Invalid credentials'
+            ) {
+                alert('Invalid email, name, or password.');
             } else {
-                navigate('/dashboard');
+                alert('An error occurred. Please try again.');
             }
         }
-    } catch (error) {
-        if (
-            error.response &&
-            error.response.data &&
-            error.response.data.error === 'Email already exists'
-        ) {
-            alert('Email already exists. Please use a different email.');
-        } else if (
-            error.response &&
-            error.response.data &&
-            error.response.data.error === 'Invalid credentials'
-        ) {
-            alert('Invalid email, name, or password.');
-        } else {
-            alert('An error occurred. Please try again.');
-        }
-    }
-};
+    };
+
     const toggleAction = () => {
         setAction(action === 'login' ? 'register' : 'login');
     };
@@ -112,6 +114,17 @@ const LoginSignup = () => {
                                 required
                             />
                             <MdEmail className="icon" />
+                        </div>
+                        <div className='input-box'>
+                            <input 
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                required
+                            />
+                            <FaLock className="icon" />
                         </div>
                         <button type="submit">Login</button>
                         <div className="register-link">
@@ -162,12 +175,12 @@ const LoginSignup = () => {
                         </div>
                         <div className='input-box'>
                             <input 
-                            type="password"
-                            name="password"
-                            placeholder="Password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                required
                             />
                             <FaLock className="icon" />
                         </div>
