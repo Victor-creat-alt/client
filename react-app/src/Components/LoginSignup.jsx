@@ -36,89 +36,47 @@ const LoginSignup = () => {
         };
 
         try {
-            if (action === 'login') {
-                axios
-                    .get(`${baseUrl}${url}`)
-                    .then((response) => {
-                        const users = response.data;
-                        const user = users.find(
-                            (u) =>
-                                u.email === formData.email && u.name === formData.name
-                        );
-                        if (user) {
-                            setAuthState({ studentId: user.id, userType });
-                            alert('Successfully logged in.');
-                            if (userType === 'student') {
-                                navigate('/home');
-                            } else {
-                                navigate('/dashboard');
-                            }
-                        } else {
-                            alert('Invalid email or name.');
-                        }
-                    })
-                    .catch(() => {
-                        alert('An error occurred. Please try again.');
-                    });
+        if (action === 'login') {
+            // POST to /login
+            const response = await axios.post(`${baseUrl}/login`, data);
+            const user = response.data;
+            setAuthState({ studentId: user.id, userType: user.userType });
+            alert('Successfully logged in.');
+            if (userType === 'student') {
+                navigate('/home');
             } else {
-                axios
-                    .get(`${baseUrl}${url}`)
-                    .then((response) => {
-                        const users = response.data;
-                        const existingUser = users.find(
-                            (u) => u.name === formData.name && u.email === formData.email
-                        );
-                        if (existingUser) {
-                            alert('User already exists.');
-                        } else {
-                            axios
-                                .post(`${baseUrl}${url}`, data)
-                                .then((response) => {
-                                    const responseData = response.data;
-                                    if (responseData && responseData.email) {
-                                        setAuthState({ studentId: responseData.id, userType });
-                                        alert('Registration successful.');
-                                        if (userType === 'student') {
-                                            navigate('/home');
-                                        } else {
-                                            navigate('/dashboard');
-                                        }
-                                    } else {
-                                        alert(
-                                            'Registration failed. Please try again.'
-                                        );
-                                    }
-                                })
-                                .catch((error) => {
-                                    if (
-                                        error.response &&
-                                        error.response.data &&
-                                        error.response.data.error ===
-                                        'Email already exists'
-                                    ) {
-                                        alert(
-                                            'Email already exists. Please use a different email.'
-                                        );
-                                    } else {
-                                        alert(
-                                            'Registration failed. Please try again.'
-                                        );
-                                    }
-                                });
-                        }
-                    })
-                    .catch(() => {
-                        alert(
-                            'An error occurred while checking for existing users.'
-                        );
-                    });
+                navigate('/dashboard');
             }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An unexpected error occurred. Please try again.');
+        } else {
+            // POST to /signup
+            const response = await axios.post(`${baseUrl}/signup`, data);
+            const user = response.data;
+            setAuthState({ studentId: user.id, userType: user.userType });
+            alert('Registration successful.');
+            if (userType === 'student') {
+                navigate('/home');
+            } else {
+                navigate('/dashboard');
+            }
         }
-    };
-
+    } catch (error) {
+        if (
+            error.response &&
+            error.response.data &&
+            error.response.data.error === 'Email already exists'
+        ) {
+            alert('Email already exists. Please use a different email.');
+        } else if (
+            error.response &&
+            error.response.data &&
+            error.response.data.error === 'Invalid credentials'
+        ) {
+            alert('Invalid email, name, or password.');
+        } else {
+            alert('An error occurred. Please try again.');
+        }
+    }
+};
     const toggleAction = () => {
         setAction(action === 'login' ? 'register' : 'login');
     };

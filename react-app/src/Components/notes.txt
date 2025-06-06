@@ -1,40 +1,54 @@
-import React from 'react';
-import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+// ...existing imports...
+const baseUrl = import.meta.env.VITE_API_URL;
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        userType,
+    };
 
-const StudentEnrollmentLineGraph = ({ data }) => {
-  const chartData = {
-    labels: data.map((item) => item.name),
-    datasets: [
-      {
-        label: 'Enrollment Count',
-        data: data.map((item) => item.enrollmentCount),
-        fill: false,
-        backgroundColor: 'rgb(75, 192, 192)',
-        borderColor: 'rgba(75, 192, 192, 0.2)',
-      },
-    ],
-  };
-
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: { position: 'top' },
-      title: { display: true, text: 'Student Enrollment Counts' },
-    },
-    scales: {
-      y: { beginAtZero: true, title: { display: true, text: 'Enrollment Count' } },
-      x: { title: { display: true, text: 'Student Names' } },
-    },
-  };
-
-  return (
-    <div style={{ width: '80%', margin: 'auto' }}>
-      <Line data={chartData} options={options} />
-    </div>
-  );
+    try {
+        if (action === 'login') {
+            // POST to /login
+            const response = await axios.post(`${baseUrl}/login`, data);
+            const user = response.data;
+            setAuthState({ studentId: user.id, userType: user.userType });
+            alert('Successfully logged in.');
+            if (userType === 'student') {
+                navigate('/home');
+            } else {
+                navigate('/dashboard');
+            }
+        } else {
+            // POST to /signup
+            const response = await axios.post(`${baseUrl}/signup`, data);
+            const user = response.data;
+            setAuthState({ studentId: user.id, userType: user.userType });
+            alert('Registration successful.');
+            if (userType === 'student') {
+                navigate('/home');
+            } else {
+                navigate('/dashboard');
+            }
+        }
+    } catch (error) {
+        if (
+            error.response &&
+            error.response.data &&
+            error.response.data.error === 'Email already exists'
+        ) {
+            alert('Email already exists. Please use a different email.');
+        } else if (
+            error.response &&
+            error.response.data &&
+            error.response.data.error === 'Invalid credentials'
+        ) {
+            alert('Invalid email, name, or password.');
+        } else {
+            alert('An error occurred. Please try again.');
+        }
+    }
 };
-
-export default StudentEnrollmentLineGraph;
