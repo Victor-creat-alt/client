@@ -1,6 +1,6 @@
 import React from 'react'
 import './Hero.css';
-import classroom from '../../assets/class.jpg/';
+import classroom from '../../assets/class.jpg';
 
 const Hero = () => {
   return (

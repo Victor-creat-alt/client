@@ -261,7 +261,7 @@ const CourseDetails = () => {
             <div key={course.id} className="course-card">
               <div className="course-image-container">
                 <img
-                  src={`/src/assets/${course.image}`}
+                  src={`/assets/${course.image}`}
                   alt={course.title}
                   className="course-image"
                 />
