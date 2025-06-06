@@ -1,8 +1,5 @@
 import React from 'react';
 import './Footer.css'
-import facebook from '../../assets/facebook_icon.png'
-import twitter from '../../assets/twitter_icon.png'
-import linkedin from '../../assets/linkedin_icon.png'
 import { useLocation } from 'react-router-dom';
 
 const Footer = () => {
@@ -21,9 +18,9 @@ const Footer = () => {
             <h2>Tech Academy</h2>
             <p>From beginners to advanced learners, find courses that fit your level and interests</p>
             <div className="social_icons">
-              <img src={facebook} alt="social_icons" className="icons" />
-              <img src={linkedin} alt="social-icons" className="icons" />
-              <img src={twitter} alt="social_icons" className="icons" />
+              <img src="/assets/facebook_icon.png" alt="social_icons" className="icons" />
+              <img src="/assets/linkedin_icon.png" alt="social-icons" className="icons" />
+              <img src="/assets/twitter_icon.png" alt="social_icons" className="icons" />
             </div>
           </div>
           <div className="content_center">
