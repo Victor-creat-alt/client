@@ -180,7 +180,7 @@ const CourseDetails = () => {
       const fetchEnrolledCourses = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:5555/enrollments?studentId=${userId}`
+       `/api/enrollments?studentId=${userId}`
           );
           const enrolledCourseIds = response.data.map(
             (enrollment) => enrollment.courseId
@@ -223,21 +223,21 @@ const CourseDetails = () => {
 
       if (enrolledCourses.includes(courseId)) {
         const response = await axios.get(
-          `http://localhost:5555/enrollments?studentId=${userId}&courseId=${courseId}`
-        );
+       `/api/enrollments?studentId=${userId}&courseId=${courseId}`
+       );
         const enrollment = response.data[0];
         if (!enrollment) {
           setError('Enrollment not found.');
           return;
         }
-        await axios.delete(`http://localhost:5555/enrollments/${enrollment.id}`);
+        await axios.delete(`/api/enrollments/${enrollment.id}`);
         setEnrolledCourses(enrolledCourses.filter((id) => id !== courseId));
         alert('You have been de-enrolled from the course.');
       } else {
-        await axios.post('http://localhost:5555/enrollments', {
-          studentId: userId,
-          courseId: courseId,
-        });
+        await axios.post('/api/enrollments', {
+        studentId: userId,
+       courseId: courseId,
+       });
         setEnrolledCourses([...enrolledCourses, courseId]);
         alert('Enrolled successfully.');
       }

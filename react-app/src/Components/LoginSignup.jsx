@@ -19,7 +19,7 @@ const LoginSignup = () => {
     });
 
     const userType = location.state?.userType || 'student';
-    const baseUrl = 'http://localhost:5555';
+    const baseUrl = '/api';
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });

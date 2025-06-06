@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 function EnrolledStudents() {
     const [enrolledStudents, setEnrolledStudents] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
-    const API_BASE_URL = 'http://127.0.0.1:5555';
+    const API_BASE_URL = '/api';
     const navigate = useNavigate();
 
     const handleBackClick = () => {

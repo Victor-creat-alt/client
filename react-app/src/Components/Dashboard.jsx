@@ -18,14 +18,14 @@ const Dashboard = () => {
     const [instructors, setInstructors] = useState([]);
     const [departments, setDepartments] = useState([]);
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const API_BASE_URL = "http://127.0.0.1:5555";
+    const API_BASE_URL = "/api";
     const location = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const coursesResponse = await axios.get(`${API_BASE_URL}/courses`);
+              const coursesResponse = await axios.get(`${API_BASE_URL}/courses`);
                 if (coursesResponse.headers["content-type"].includes("application/json")) {
                     setCourses(coursesResponse.data);
                 } else {

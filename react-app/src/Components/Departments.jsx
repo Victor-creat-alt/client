@@ -10,7 +10,7 @@ function Departments() {
   const [departments, setDepartments] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const API_BASE_URL = "http://127.0.0.1:5555";
+  const API_BASE_URL = "/api";
   const navigate = useNavigate();
 
   const handleBackClick = () => {
