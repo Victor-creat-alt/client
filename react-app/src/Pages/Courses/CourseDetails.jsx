@@ -174,6 +174,7 @@ const CourseDetails = () => {
 
   const [enrolledCourses, setEnrolledCourses] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://course-2tq7.onrender.com';
 
@@ -195,14 +196,16 @@ const CourseDetails = () => {
         }
       };
       fetchEnrolledCourses();
+    } else {
+      setEnrolledCourses([]);
     }
   }, [userId]);
 
   const handleToggleEnrollment = async (courseId) => {
     if (!userId) {
-      alert('Please log in to enroll in courses.');
       return;
     }
+    setLoading(true);
     try {
       if (enrolledCourses.includes(courseId)) {
         // Find the enrollment id to delete
@@ -212,24 +215,24 @@ const CourseDetails = () => {
         const enrollment = response.data[0];
         if (!enrollment) {
           setError('Enrollment not found.');
+          setLoading(false);
           return;
         }
         await axios.delete(`${API_BASE_URL}/enrollments/${enrollment.id}`);
         setEnrolledCourses(enrolledCourses.filter((id) => id !== courseId));
-        alert('You have been de-enrolled from the course.');
       } else {
         await axios.post(`${API_BASE_URL}/enrollments`, {
           studentId: userId,
           courseId: courseId,
         });
         setEnrolledCourses([...enrolledCourses, courseId]);
-        alert('Enrolled successfully.');
       }
       setError(null);
     } catch (err) {
       console.error('Failed to toggle enrollment:', err);
       setError('Failed to toggle enrollment.');
     }
+    setLoading(false);
   };
 
   return (
@@ -264,8 +267,10 @@ const CourseDetails = () => {
                     isEnrolled ? 'enrolled-btn' : 'enroll-btn'
                   }`}
                   onClick={() => handleToggleEnrollment(course.id)}
+                  disabled={!userId || loading}
+                  title={!userId ? 'Please log in to enroll' : ''}
                 >
-                  {isEnrolled ? 'Enrolled' : 'Enroll Now'}
+                  {loading && userId ? 'Processing...' : isEnrolled ? 'Enrolled' : 'Enroll Now'}
                 </button>
               </div>
             </div>
