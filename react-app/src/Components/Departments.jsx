@@ -10,6 +10,7 @@ function Departments() {
   const [departments, setDepartments] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [error, setError] = useState(null);
   const API_BASE_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
@@ -17,38 +18,63 @@ function Departments() {
     navigate('/dashboard'); // Navigate back to Dashboard.jsx
   };
 
-
   useEffect(() => {
+    if (!API_BASE_URL) {
+      setError('API base URL is not defined. Please check your environment configuration.');
+      return;
+    }
     axios.get(`${API_BASE_URL}/departments`)
       .then(res => {
-        if (res.headers['content-type'].includes('application/json')) {
+        if (res.headers['content-type'] && res.headers['content-type'].includes('application/json')) {
           setDepartments(res.data);
+          setError(null);
         } else {
           console.error('Departments data is not JSON:', res);
           setDepartments([]);
+          setError('Received data is not in JSON format.');
         }
       })
-      .catch(error => console.error('Error fetching departments:', error));
-  }, []);
+      .catch(error => {
+        console.error('Error fetching departments:', error);
+        setError('Failed to fetch departments. Please try again later.');
+        setDepartments([]);
+      });
+  }, [API_BASE_URL]);
 
   const handleAddDepartment = (newDepartment) => {
+    if (!API_BASE_URL) {
+      setError('API base URL is not defined. Cannot add department.');
+      return;
+    }
     axios.post(`${API_BASE_URL}/departments`, newDepartment)
       .then(res => {
         setDepartments([...departments, res.data]);
         setIsModalOpen(false);
+        setError(null);
       })
-      .catch(error => console.error('Error adding department:', error));
+      .catch(error => {
+        console.error('Error adding department:', error);
+        setError('Failed to add department. Please try again.');
+      });
   };
 
   const handleDeleteDepartment = (id) => {
+    if (!API_BASE_URL) {
+      setError('API base URL is not defined. Cannot delete department.');
+      return;
+    }
     axios.delete(`${API_BASE_URL}/departments/${id}`)
       .then(() => {
-        setDepartments(departments.filter(department => department.id !== id));
+        setDepartments((departments || []).filter(department => department.id !== id));
+        setError(null);
       })
-      .catch(error => console.error('Error deleting department:', error));
+      .catch(error => {
+        console.error('Error deleting department:', error);
+        setError('Failed to delete department. Please try again.');
+      });
   };
 
-  const filteredDepartments = departments.filter(department =>
+  const filteredDepartments = (departments || []).filter(department =>
     department.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -77,8 +103,9 @@ function Departments() {
         className="search-input"
       />
 
-      {/* Display Departments */}
-      {departments.length > 0 ? (
+      {error ? (
+        <p className="error-message" style={{ color: 'red' }}>{error}</p>
+      ) : departments.length > 0 ? (
         <>
           <table className="departments-table">
             <thead>
