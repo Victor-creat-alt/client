@@ -175,7 +175,7 @@ const CourseDetails = () => {
   const [enrolledCourses, setEnrolledCourses] = useState([]);
   const [error, setError] = useState(null);
 
-  const API_BASE_URL = import.meta.env.VITE_API_URL;
+  const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://course-2tq7.onrender.com';
 
   useEffect(() => {
     if (userId) {
@@ -224,6 +224,7 @@ const CourseDetails = () => {
       }
 
       if (enrolledCourses.includes(courseId)) {
+        // Find the enrollment id to delete
         const response = await axios.get(
           `${API_BASE_URL}/enrollments?studentId=${userId}&courseId=${courseId}`
         );
@@ -232,14 +233,14 @@ const CourseDetails = () => {
           setError('Enrollment not found.');
           return;
         }
-         await axios.delete(`${API_BASE_URL}/enrollments/${enrollment.id}`);
+        await axios.delete(`${API_BASE_URL}/enrollments/${enrollment.id}`);
         setEnrolledCourses(enrolledCourses.filter((id) => id !== courseId));
         alert('You have been de-enrolled from the course.');
       } else {
-       await axios.post(`${API_BASE_URL}/enrollments`, {
-        studentId: userId,
-       courseId: courseId,
-       });
+        await axios.post(`${API_BASE_URL}/enrollments`, {
+          studentId: userId,
+          courseId: courseId,
+        });
         setEnrolledCourses([...enrolledCourses, courseId]);
         alert('Enrolled successfully.');
       }
