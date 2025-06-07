@@ -18,7 +18,8 @@ const LoginSignup = () => {
     password: '',
   });
 
-  const userType = location.state?.userType || 'student';
+  // Ensure userType is always set and not empty
+  const userType = location.state?.userType && location.state.userType.trim() !== '' ? location.state.userType : 'student';
   const baseUrl = import.meta.env.VITE_API_URL;
 
   const handleChange = (e) => {
@@ -27,6 +28,17 @@ const LoginSignup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!userType) {
+      alert('User type is missing or invalid.');
+      return;
+    }
+
+    if (!baseUrl || baseUrl.trim() === '') {
+      console.warn('API base URL is not set. Please check your environment variables.');
+      alert('Server URL is not configured. Please contact support.');
+      return;
+    }
 
     console.log('Base URL:', baseUrl);
     console.log('Submitting data:', { ...formData, userType });
