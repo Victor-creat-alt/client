@@ -53,6 +53,7 @@ const LoginSignup = () => {
       };
     } else {
       data = {
+        name: formData.name,
         email: formData.email,
         password: formData.password,
         userType: userType,
