@@ -23,10 +23,10 @@ function Departments() {
       setError('API base URL is not defined. Please check your environment configuration.');
       return;
     }
-    axios.get(`${API_BASE_URL}/departments`)
+    axios.get(API_BASE_URL + '/departments')
       .then(res => {
         if (res.headers['content-type'] && res.headers['content-type'].includes('application/json')) {
-          setDepartments(res.data);
+          setDepartments(res.data || []);
           setError(null);
         } else {
           console.error('Departments data is not JSON:', res);
@@ -46,7 +46,7 @@ function Departments() {
       setError('API base URL is not defined. Cannot add department.');
       return;
     }
-    axios.post(`${API_BASE_URL}/departments`, newDepartment)
+    axios.post(API_BASE_URL + '/departments', newDepartment)
       .then(res => {
         setDepartments([...departments, res.data]);
         setIsModalOpen(false);
@@ -63,7 +63,7 @@ function Departments() {
       setError('API base URL is not defined. Cannot delete department.');
       return;
     }
-    axios.delete(`${API_BASE_URL}/departments/${id}`)
+    axios.delete(API_BASE_URL + '/departments/' + id)
       .then(() => {
         setDepartments((departments || []).filter(department => department.id !== id));
         setError(null);
@@ -75,7 +75,7 @@ function Departments() {
   };
 
   const filteredDepartments = (departments || []).filter(department =>
-    department.name.toLowerCase().includes(searchQuery.toLowerCase())
+    department?.name?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -105,7 +105,7 @@ function Departments() {
 
       {error ? (
         <p className="error-message" style={{ color: 'red' }}>{error}</p>
-      ) : departments.length > 0 ? (
+      ) : (departments && departments.length > 0) ? (
         <>
           <table className="departments-table">
             <thead>

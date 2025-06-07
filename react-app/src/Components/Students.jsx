@@ -12,46 +12,71 @@ function Students() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [lineGraphData, setLineGraphData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [error, setError] = useState(null);
   const API_BASE_URL = import.meta.env.VITE_API_URL;
-   const navigate = useNavigate();
+  const navigate = useNavigate();
   
-      const handleBackClick = () => {
-        navigate('/departments'); // Navigate back to Students.jsx
-      };
+  const handleBackClick = () => {
+    navigate('/departments'); // Navigate back to Departments.jsx
+  };
 
   useEffect(() => {
+    if (!API_BASE_URL) {
+      setError('API base URL is not defined. Please check your environment configuration.');
+      return;
+    }
     // Fetch all students
-    axios.get(`${API_BASE_URL}/students`)
-      .then((res) => setStudents(res.data))
-      .catch((error) => console.error('Error fetching students:', error));
+    axios.get(API_BASE_URL + '/students')
+      .then((res) => {
+        setStudents(res.data || []);
+        setError(null);
+      })
+      .catch((error) => {
+        console.error('Error fetching students:', error);
+        setError('Failed to fetch students. Please try again later.');
+        setStudents([]);
+      });
 
     // Fetch enrollment counts for all students
-    axios.get(`${API_BASE_URL}/student_enrollment_counts`)
+    axios.get(API_BASE_URL + '/student_enrollment_counts')
       .then((res) => {
-        // Filter data to only include students who have registered/logged in and enrolled
-        const filteredData = res.data.filter(item => item.enrollmentCount > 0 && item.name);
+        const filteredData = (res.data || []).filter(item => item.enrollmentCount > 0 && item.name);
         setLineGraphData(filteredData);
       })
-      .catch((error) => console.error('Error fetching enrollment counts:', error));
-  }, []);
+      .catch((error) => {
+        console.error('Error fetching enrollment counts:', error);
+        setLineGraphData([]);
+      });
+  }, [API_BASE_URL]);
 
   const handleRemoveStudent = (studentId) => {
-    axios.delete(`${API_BASE_URL}/students/${studentId}`)
+    if (!API_BASE_URL) {
+      setError('API base URL is not defined. Cannot remove student.');
+      return;
+    }
+    axios.delete(API_BASE_URL + '/students/' + studentId)
       .then(() => {
         setStudents(students.filter((student) => student.id !== studentId));
         setIsModalOpen(false);
+        setError(null);
         // Refresh enrollment counts after removing a student
-        axios.get(`${API_BASE_URL}/student_enrollment_counts`)
+        axios.get(API_BASE_URL + '/student_enrollment_counts')
           .then((res) => {
-            const filteredData = res.data.filter(item => item.enrollmentCount > 0 && item.name);
+            const filteredData = (res.data || []).filter(item => item.enrollmentCount > 0 && item.name);
             setLineGraphData(filteredData);
           })
-          .catch((error) => console.error('Error fetching enrollment counts:', error));
+          .catch((error) => {
+            console.error('Error fetching enrollment counts:', error);
+            setLineGraphData([]);
+          });
       })
-      .catch((error) => console.error('Error removing student:', error));
+      .catch((error) => {
+        console.error('Error removing student:', error);
+        setError('Failed to remove student. Please try again.');
+      });
   };
 
-  const filteredStudents = students.filter(student =>
+  const filteredStudents = (students || []).filter(student =>
     student.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -65,8 +90,8 @@ function Students() {
         Remove Student
       </button>
       <button onClick={handleBackClick} className="back-button">
-              <FaArrowLeft />
-            </button>
+        <FaArrowLeft />
+      </button>
 
       {isModalOpen && (
         <RemoveStudentForm
@@ -83,7 +108,9 @@ function Students() {
         className="search-input"
       />
 
-      {students.length > 0 ? (
+      {error ? (
+        <p className="error-message" style={{ color: 'red' }}>{error}</p>
+      ) : (students && students.length > 0) ? (
         <table className="students-table">
           <thead>
             <tr>
