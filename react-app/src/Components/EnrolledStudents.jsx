@@ -51,7 +51,11 @@ function EnrolledStudents() {
             })
             .catch((error) => {
                 console.error('Error fetching Enrollments:', error);
-                setError('Failed to fetch enrollments. Please try again later.');
+                if (error.response && error.response.status === 404) {
+                    setError('Enrollments endpoint not found (404). Please check the server.');
+                } else {
+                    setError('Failed to fetch enrollments. Please try again later.');
+                }
                 setEnrolledStudents([]);
             });
     };
