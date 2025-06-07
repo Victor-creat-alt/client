@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaLock, FaEye, FaEyeSlash, FaEnvelope } from 'react-icons/fa';
 import axios from 'axios';
 import './LoginSignup.css';
 
@@ -8,8 +8,8 @@ const ResetPassword = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
+    email: '',
     newPassword: '',
-    confirmPassword: '',
   });
 
   const [error, setError] = useState('');
@@ -29,22 +29,31 @@ const ResetPassword = () => {
     setShowPassword(!showPassword);
   };
 
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setSuccessMessage('');
 
-    if (!formData.newPassword || !formData.confirmPassword) {
-      setError('Please fill in both password fields.');
+    if (!formData.email) {
+      setError('Please enter your email.');
       return;
     }
 
-    if (formData.newPassword !== formData.confirmPassword) {
-      setError('Passwords do not match.');
+    if (!validateEmail(formData.email)) {
+      setError('Please enter a valid email address.');
       return;
     }
 
-    // Password validation: at least 8 chars and at least one digit
+    if (!formData.newPassword) {
+      setError('Please enter a new password.');
+      return;
+    }
+
     if (formData.newPassword.length < 8) {
       setError('Password must be at least 8 characters long.');
       return;
@@ -57,9 +66,8 @@ const ResetPassword = () => {
     setIsSubmitting(true);
 
     try {
-      // Assuming the backend reset password endpoint is /reset-password
-      // and expects JSON { new_password: string }
-      const response = await axios.post(`${baseUrl}/reset-password`, {
+      await axios.post(`${baseUrl}/reset-password`, {
+        email: formData.email,
         new_password: formData.newPassword,
       }, {
         headers: {
@@ -91,6 +99,18 @@ const ResetPassword = () => {
 
         <div className="input-group">
           <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <FaEnvelope className="icon" />
+        </div>
+
+        <div className="input-group">
+          <input
             type={showPassword ? 'text' : 'password'}
             name="newPassword"
             placeholder="New Password"
@@ -108,18 +128,6 @@ const ResetPassword = () => {
           >
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </span>
-        </div>
-
-        <div className="input-group">
-          <input
-            type={showPassword ? 'text' : 'password'}
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            required
-          />
-          <FaLock className="icon" />
         </div>
 
         <button type="submit" disabled={isSubmitting}>
