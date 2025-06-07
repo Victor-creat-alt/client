@@ -203,8 +203,10 @@ const CourseDetails = () => {
 
   const handleToggleEnrollment = async (courseId) => {
     if (!userId) {
+      setError('User not logged in.');
       return;
     }
+    console.log('Attempting enrollment toggle with userId:', userId, 'courseId:', courseId);
     setLoading(true);
     try {
       if (enrolledCourses.includes(courseId)) {
@@ -221,16 +223,22 @@ const CourseDetails = () => {
         await axios.delete(`${API_BASE_URL}/enrollments/${enrollment.id}`);
         setEnrolledCourses(enrolledCourses.filter((id) => id !== courseId));
       } else {
-        await axios.post(`${API_BASE_URL}/enrollments`, {
+        const payload = {
           studentId: userId,
           courseId: courseId,
-        });
+        };
+        console.log('Sending enrollment POST with payload:', payload);
+        await axios.post(`${API_BASE_URL}/enrollments`, payload);
         setEnrolledCourses([...enrolledCourses, courseId]);
       }
       setError(null);
     } catch (err) {
       console.error('Failed to toggle enrollment:', err);
-      setError('Failed to toggle enrollment.');
+      if (err.response && err.response.data && err.response.data.error) {
+        setError(`Failed to toggle enrollment: ${err.response.data.error}`);
+      } else {
+        setError('Failed to toggle enrollment.');
+      }
     }
     setLoading(false);
   };
