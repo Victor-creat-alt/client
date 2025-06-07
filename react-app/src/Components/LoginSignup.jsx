@@ -28,6 +28,9 @@ const LoginSignup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log('Base URL:', baseUrl);
+    console.log('Submitting data:', { ...formData, userType });
+
     // Prepare data payload based on action
     let data;
     if (action === 'login') {
@@ -50,7 +53,7 @@ const LoginSignup = () => {
         // POST to /login
         const response = await axios.post(`${baseUrl}/login`, data);
         const user = response.data;
-        setAuthState({ studentId: user.id, userType: user.userType });
+        setAuthState({ userId: user.id, userType: user.userType });
         alert('Successfully logged in.');
         if (userType === 'student') {
           navigate('/home');
@@ -61,7 +64,7 @@ const LoginSignup = () => {
         // POST to /signup
         const response = await axios.post(`${baseUrl}/signup`, data);
         const user = response.data;
-        setAuthState({ studentId: user.id, userType: user.userType });
+        setAuthState({ userId: user.id, userType: user.userType });
         alert('Registration successful.');
         if (userType === 'student') {
           navigate('/home');
@@ -82,6 +85,12 @@ const LoginSignup = () => {
         error.response.data.error === 'Invalid credentials'
       ) {
         alert('Invalid email or password.');
+      } else if (
+        error.response &&
+        error.response.data &&
+        error.response.data.error
+      ) {
+        alert(`Error: ${error.response.data.error}`);
       } else {
         alert('An error occurred. Please try again.');
       }
