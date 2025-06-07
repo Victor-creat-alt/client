@@ -12,6 +12,7 @@ import Dashboard from './Components/Dashboard.jsx';
 import Departments from './Components/Departments.jsx';
 import Students from './Components/Students.jsx';
 import LoginSignup from './Components/LoginSignup.jsx';
+import ResetPassword  from './Components/ResetPassword.jsx';
 import SelectOption from './Components/SelectOption.jsx';
 import EnrolledStudents from './Components/EnrolledStudents.jsx';
 import LogOut from './Components/LogOut.jsx'; // Import LogOut
@@ -25,6 +26,7 @@ function App() {
           <Routes>
             <Route path="/" element={<SelectOption />} />
             <Route path="/login" element={<LoginSignup />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/home" element={<Home />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/about" element={<About />} />
