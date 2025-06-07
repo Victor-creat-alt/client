@@ -1,5 +1,5 @@
 /* Select Option Styles */
-body {
+.select-page-body {
   background: linear-gradient(rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.8)), 
               url('../assets/select-background.webp');
   background-size: cover;

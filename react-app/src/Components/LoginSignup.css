@@ -59,7 +59,7 @@
 }
 
 /* Form Header */
-.login-container form h1 {
+.login-container .wrapper form h1 {
   font-size: 32px;
   text-align: center;
   margin-bottom: 20px;
@@ -69,14 +69,14 @@
 }
 
 /* Input Box */
-.login-container form .input-box {
+.login-container .wrapper form .input-box {
   position: relative;
   width: 65%;
   margin: 20px auto;
   text-align: center;
 }
 
-.login-container .input-box input {
+.login-container .wrapper .input-box input {
   width: 70%;
   height: 40px;
   background: rgba(255, 255, 255, 0.1);
@@ -87,19 +87,20 @@
   color: #fff;
   padding: 0 40px 0 15px;
   transition: border-color 0.3s ease, background 0.3s ease;
+  box-sizing: border-box;
 }
 
-.login-container .input-box input:focus {
+.login-container .wrapper .input-box input:focus {
   border-color: #fff;
   background: rgba(255, 255, 255, 0.2);
 }
 
-.login-container .input-box input::placeholder {
+.login-container .wrapper .input-box input::placeholder {
   color: rgba(255, 255, 255, 0.7);
   font-style: italic;
 }
 
-.login-container .input-box .icon {
+.login-container .wrapper .input-box .icon {
   position: absolute;
   right: 15px;
   top: 50%;
@@ -109,7 +110,7 @@
 }
 
 /* Remember & Forgot */
-.login-container form .remember-forgot {
+.login-container .wrapper form .remember-forgot {
   display: flex;
   justify-content: space-between;
   font-size: 14px;
@@ -117,25 +118,25 @@
   color: #fff;
 }
 
-.login-container .remember-forgot label input {
+.login-container .wrapper .remember-forgot label input {
   accent-color: #fff;
   margin-right: 5px;
 }
 
-.login-container .remember-forgot a {
+.login-container .wrapper .remember-forgot a {
   color: #fff;
   text-decoration: none;
   font-weight: 500;
   transition: text-decoration 0.3s ease, color 0.3s ease;
 }
 
-.login-container .remember-forgot a:hover {
+.login-container .wrapper .remember-forgot a:hover {
   color: #f0f0f0;
   text-decoration: underline;
 }
 
 /* Button Styles */
-.login-container form button {
+.login-container .wrapper form button {
   width: 70%;
   height: 50px;
   display: block;
@@ -152,26 +153,26 @@
   transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-.login-container form button:hover {
+.login-container .wrapper form button:hover {
   background: rgba(255, 255, 255, 0.5);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
 }
 
 /* Register Link */
-.login-container form .register-link {
+.login-container .wrapper form .register-link {
   font-size: 14px;
   text-align: center;
   margin-top: 15px;
   color: rgba(255, 255, 255, 0.8);
 }
 
-.login-container .register-link p a {
+.login-container .wrapper .register-link p a {
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s ease;
   color:aquamarine;
 }
 
-.login-container .register-link p a:hover {
+.login-container .wrapper .register-link p a:hover {
   color: rgb(52, 167, 128);
 }

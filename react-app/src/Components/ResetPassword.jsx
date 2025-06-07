@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaLock, FaEye, FaEyeSlash, FaEnvelope } from 'react-icons/fa';
 import axios from 'axios';
-import './LoginSignup.css';
+import './ResetPassword.css';
 
 const ResetPassword = () => {
   const navigate = useNavigate();
