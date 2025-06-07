@@ -157,14 +157,36 @@ const LoginSignup = () => {
   return (
     <div className="login-container">
       <div className={`wrapper ${action === 'register' ? 'active' : ''}`}>
+        {/* Login Form */}
         <div className="form-box login">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={(e) => handleSubmit(e, 'login')}>
             <h1>{userType === 'student' ? 'Student Login' : 'Instructor Login'}</h1>
-            <FormInputs />
-            <button type="submit">{action === 'login' ? 'Login' : 'Register'}</button>
+            <div className="input-box">
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+              <MdEmail className="icon" />
+            </div>
+            <div className="input-box">
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+              <FaLock className="icon" />
+            </div>
+            <button type="submit">Login</button>
             <div className="register-link">
               <p>
-                {action === 'login' ? "Don't have an account?" : 'Already have an account?'}{' '}
+                Don't have an account?{' '}
                 <a
                   href="#"
                   onClick={(e) => {
@@ -172,7 +194,62 @@ const LoginSignup = () => {
                     toggleAction();
                   }}
                 >
-                  {action === 'login' ? 'Register' : 'Login'}
+                  Register
+                </a>
+              </p>
+            </div>
+          </form>
+        </div>
+
+        {/* Register Form */}
+        <div className="form-box register">
+          <form onSubmit={(e) => handleSubmit(e, 'register')}>
+            <h1>{userType === 'student' ? 'Student Register' : 'Instructor Register'}</h1>
+            <div className="input-box">
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+              <FaUser className="icon" />
+            </div>
+            <div className="input-box">
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+              <MdEmail className="icon" />
+            </div>
+            <div className="input-box">
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+              <FaLock className="icon" />
+            </div>
+            <button type="submit">Register</button>
+            <div className="register-link">
+              <p>
+                Already have an account?{' '}
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleAction();
+                  }}
+                >
+                  Login
                 </a>
               </p>
             </div>
