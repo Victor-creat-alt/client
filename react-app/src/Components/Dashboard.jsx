@@ -1,4 +1,3 @@
-// Dashboard.jsx
 import React, { useState, useEffect } from "react";
 import { Pie, Line } from "react-chartjs-2";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -18,23 +17,31 @@ const Dashboard = () => {
     const [instructors, setInstructors] = useState([]);
     const [departments, setDepartments] = useState([]);
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const API_BASE_URL = import.meta.env.VITE_API_URL;
+    const API_BASE_URL = import.meta.env.VITE_API_URL || "";
     const location = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-              const coursesResponse = await axios.get(`${API_BASE_URL}/courses`);
-                if (coursesResponse.headers["content-type"].includes("application/json")) {
-                    setCourses(coursesResponse.data);
+                const coursesResponse = await axios.get(API_BASE_URL + "/courses");
+                if (coursesResponse.headers["content-type"] && coursesResponse.headers["content-type"].includes("application/json")) {
+                    // Prepend API_BASE_URL to image_url if relative
+                    const coursesData = coursesResponse.data.map(course => {
+                        let imageUrl = course.image_url || "";
+                        if (imageUrl && !imageUrl.startsWith("http://") && !imageUrl.startsWith("https://")) {
+                            imageUrl = API_BASE_URL + imageUrl;
+                        }
+                        return { ...course, image_url: imageUrl };
+                    });
+                    setCourses(coursesData);
                 } else {
                     console.error("Courses data is not JSON:", coursesResponse);
                     setCourses([]);
                 }
 
-                const studentsResponse = await axios.get(`${API_BASE_URL}/students`);
-                if (studentsResponse.headers["content-type"].includes("application/json")) {
+                const studentsResponse = await axios.get(API_BASE_URL + "/students");
+                if (studentsResponse.headers["content-type"] && studentsResponse.headers["content-type"].includes("application/json")) {
                     const progressData = Array.isArray(studentsResponse.data)
                         ? studentsResponse.data.map((student) => ({
                             course: Array.isArray(student.courses) && student.courses.length > 0
@@ -52,8 +59,8 @@ const Dashboard = () => {
                     setStudentProgress([]);
                 }
 
-                const enrollmentsResponse = await axios.get(`${API_BASE_URL}/enrollments`);
-                if (enrollmentsResponse.headers["content-type"].includes("application/json")) {
+                const enrollmentsResponse = await axios.get(API_BASE_URL + "/enrollments");
+                if (enrollmentsResponse.headers["content-type"] && enrollmentsResponse.headers["content-type"].includes("application/json")) {
                     const enrollments = Array.isArray(enrollmentsResponse.data)
                         ? enrollmentsResponse.data.map((enrollment) => ({
                             studentName: enrollment.student?.name || "Unknown",
@@ -67,16 +74,16 @@ const Dashboard = () => {
                     setEnrollmentsData([]);
                 }
 
-                const instructorsResponse = await axios.get(`${API_BASE_URL}/instructors`);
-                if (instructorsResponse.headers["content-type"].includes("application/json")) {
+                const instructorsResponse = await axios.get(API_BASE_URL + "/instructors");
+                if (instructorsResponse.headers["content-type"] && instructorsResponse.headers["content-type"].includes("application/json")) {
                     setInstructors(instructorsResponse.data);
                 } else {
                     console.error("Instructors data is not JSON:", instructorsResponse);
                     setInstructors([]);
                 }
 
-                const departmentsResponse = await axios.get(`${API_BASE_URL}/departments`);
-                if (departmentsResponse.headers["content-type"].includes("application/json")) {
+                const departmentsResponse = await axios.get(API_BASE_URL + "/departments");
+                if (departmentsResponse.headers["content-type"] && departmentsResponse.headers["content-type"].includes("application/json")) {
                     setDepartments(departmentsResponse.data);
                 } else {
                     console.error("Departments data is not JSON:", departmentsResponse);
@@ -118,7 +125,7 @@ const Dashboard = () => {
             label: deptName,
             data: lineLabels.map(courseTitle => courseDeptInstructorCounts[courseTitle][deptName] || 0),
             fill: false,
-            borderColor: `hsl(${(index * 60) % 360}, 70%, 50%)`,
+            borderColor: "hsl(" + ((index * 60) % 360) + ", 70%, 50%)",
             tension: 0.1,
         };
     });
@@ -193,13 +200,13 @@ const Dashboard = () => {
     });
 
     return (
-        <div className={`dashboard-container ${isDarkMode ? "dark-mode" : "light-mode"}`}>
+        <div className={"dashboard-container " + (isDarkMode ? "dark-mode" : "light-mode")}>
             <div className="navigation-links">
                 <Link to="/dashboard" className={location.pathname === "/dashboard" ? "active" : ""}>Dashboard</Link>
                 <Link to="/departments" className={location.pathname === "/departments" ? "active" : ""}>Departments</Link>
                 <Link to="/students" className={location.pathname === "/students" ? "active" : ""}>Students</Link>
                 <Link to='/enrolled-students' className={location.pathname === "/enrolled-students" ? "active" : ""}>Enrolled Students</Link>
-                <button className="logout-button" onClick={handleLogout}>
+                <button className="logout-button" onClick={handleLogout} aria-label="Logout">
                     <FiLogOut />
                 </button>
             </div>
@@ -215,7 +222,7 @@ const Dashboard = () => {
                 )}
             </div>
             <div className="progress-section">
-                <h2>Student Progress</h2>
+                <h2>Course Durations</h2>
                 <Pie data={coursePieData} options={{ responsive: true }} />
             </div>
             <div className="progress-section-2">
@@ -227,9 +234,9 @@ const Dashboard = () => {
                 )}
             </div>
             {selectedCourse && (
-                <div className="course-details-modal">
+                <div className="course-details-modal" role="dialog" aria-modal="true" aria-labelledby="course-details-title">
                     <div className="course-details-content">
-                        <h3>{selectedCourse.title}</h3>
+                        <h3 id="course-details-title">{selectedCourse.title}</h3>
                         <p>{selectedCourse.description}</p>
                         <button onClick={handleCloseDetails}>Close</button>
                     </div>
