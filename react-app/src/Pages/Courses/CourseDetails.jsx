@@ -170,7 +170,7 @@ const CourseDetails = () => {
   ];
 
   const { authState } = useAuth();
-  const userId = authState.studentId;
+  const userId = authState.userId;
 
   const [enrolledCourses, setEnrolledCourses] = useState([]);
   const [error, setError] = useState(null);
