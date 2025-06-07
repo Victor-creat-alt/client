@@ -29,6 +29,11 @@ const LoginSignup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log('handleSubmit called');
+    console.log('User type:', userType);
+    console.log('Base URL:', baseUrl);
+    console.log('Form data:', formData);
+
     if (!userType) {
       alert('User type is missing or invalid.');
       return;
@@ -39,9 +44,6 @@ const LoginSignup = () => {
       alert('Server URL is not configured. Please contact support.');
       return;
     }
-
-    console.log('Base URL:', baseUrl);
-    console.log('Submitting data:', { ...formData, userType });
 
     // Prepare data payload based on action
     let data;
@@ -62,9 +64,10 @@ const LoginSignup = () => {
 
     try {
       if (action === 'login') {
-        // POST to /login
+        console.log('Sending login request with data:', data);
         const response = await axios.post(`${baseUrl}/login`, data);
         const user = response.data;
+        console.log('Login response:', user);
         setAuthState({ userId: user.id, userType: user.userType });
         alert('Successfully logged in.');
         if (userType === 'student') {
@@ -73,9 +76,10 @@ const LoginSignup = () => {
           navigate('/dashboard');
         }
       } else {
-        // POST to /signup
+        console.log('Sending signup request with data:', data);
         const response = await axios.post(`${baseUrl}/signup`, data);
         const user = response.data;
+        console.log('Signup response:', user);
         setAuthState({ userId: user.id, userType: user.userType });
         alert('Registration successful.');
         if (userType === 'student') {
@@ -85,6 +89,7 @@ const LoginSignup = () => {
         }
       }
     } catch (error) {
+      console.error('Error during authentication:', error);
       if (
         error.response &&
         error.response.data &&
@@ -161,28 +166,7 @@ const LoginSignup = () => {
         <div className="form-box login">
           <form onSubmit={(e) => handleSubmit(e, 'login')}>
             <h1>{userType === 'student' ? 'Student Login' : 'Instructor Login'}</h1>
-            <div className="input-box">
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-              <MdEmail className="icon" />
-            </div>
-            <div className="input-box">
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-              />
-              <FaLock className="icon" />
-            </div>
+            <FormInputs />
             <button type="submit">Login</button>
             <div className="register-link">
               <p>
@@ -205,39 +189,7 @@ const LoginSignup = () => {
         <div className="form-box register">
           <form onSubmit={(e) => handleSubmit(e, 'register')}>
             <h1>{userType === 'student' ? 'Student Register' : 'Instructor Register'}</h1>
-            <div className="input-box">
-              <input
-                type="text"
-                name="name"
-                placeholder="Name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
-              <FaUser className="icon" />
-            </div>
-            <div className="input-box">
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-              <MdEmail className="icon" />
-            </div>
-            <div className="input-box">
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-              />
-              <FaLock className="icon" />
-            </div>
+            <FormInputs />
             <button type="submit">Register</button>
             <div className="register-link">
               <p>
