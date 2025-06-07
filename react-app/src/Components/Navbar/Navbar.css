@@ -101,3 +101,26 @@
         font-size: 1.4rem; /* Adjusted logo size */
     }
 }
+
+/* Additional Mobile Responsive Styles */
+@media (max-width: 600px) {
+  .nav {
+    width: 100%;
+    padding: 8px;
+    border-radius: 10px;
+  }
+
+  .links ul {
+    gap: 6px;
+  }
+
+  .links ul li {
+    font-size: 0.85rem;
+  }
+
+  .links ul li a,
+  .links ul li button {
+    padding: 6px 8px;
+    font-size: 0.85rem;
+  }
+}

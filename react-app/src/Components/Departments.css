@@ -145,3 +145,43 @@
   background-color: #2563eb;
   box-shadow: 0 6px 12px rgba(37, 99, 235, 0.6);
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 600px) {
+  .form-container {
+    max-width: 95%;
+    padding: 10px;
+  }
+
+  .form-container input {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+
+  .form-container button {
+    font-size: 14px;
+    padding: 12px 0;
+  }
+
+  .search-input {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .departments-table {
+    width: 100%;
+    font-size: 12px;
+  }
+
+  .departments-table th,
+  .departments-table td {
+    padding: 8px 10px;
+    white-space: normal;
+  }
+
+  .delete-button,
+  .add-department-button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}

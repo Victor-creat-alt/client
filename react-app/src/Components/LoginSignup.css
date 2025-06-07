@@ -170,3 +170,40 @@
 .login-container .wrapper .register-link p a:hover {
   color: rgb(52, 167, 128);
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 600px) {
+  .login-container {
+    padding: 10px;
+  }
+
+  .login-container .wrapper {
+    max-width: 95%;
+    height: auto;
+    padding: 20px;
+  }
+
+  .login-container .wrapper .form-box {
+    padding: 20px 25px;
+  }
+
+  .login-container .wrapper form h1 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+  }
+
+  .login-container .wrapper .input-box {
+    width: 90%;
+    margin: 15px auto;
+  }
+
+  .login-container .wrapper form button {
+    height: 45px;
+    font-size: 1rem;
+  }
+
+  .login-container .wrapper form .register-link {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+}

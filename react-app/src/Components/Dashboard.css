@@ -164,3 +164,64 @@ h2 {
 .logout-button:hover {
   color: #ddd;
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 600px) {
+  .dashboard-container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    margin-top: 20px;
+    margin-bottom: 15px;
+  }
+
+  .navigation-links {
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+    width: 95%;
+  }
+
+  .navigation-links a {
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+
+  .courses-section {
+    padding: 15px;
+  }
+
+  .courses-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .course-card {
+    padding: 15px;
+  }
+
+  .progress-section, .progress-section-2 {
+    padding: 15px;
+  }
+
+  .course-details-content {
+    width: 90%;
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  .theme-toggle-button {
+    padding: 8px 16px;
+    margin: 8px 0;
+  }
+
+  .logout-button {
+    font-size: 20px;
+  }
+}

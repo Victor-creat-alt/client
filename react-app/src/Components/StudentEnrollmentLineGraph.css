@@ -24,3 +24,16 @@
         width: 95%;
     }
 }
+
+/* Additional Mobile Responsive Styles */
+@media (max-width: 600px) {
+  .line-graph-container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .line-graph-title {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+  }
+}

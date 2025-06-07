@@ -31,11 +31,12 @@
 }
 
 .select-wrapper h1 {
-  font-size: 2.2rem;
+  font-size: 2.4rem;
   font-weight: 700;
-  letter-spacing: 1.2px;
+  letter-spacing: 1.4px;
   text-transform: uppercase;
-  color: #f0f0f0;
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
   margin-bottom: 30px;
 }
 
@@ -68,4 +69,23 @@
 .buttons button:hover:not(:disabled) {
   background: #5a2e8a;
   box-shadow: 0 8px 25px rgba(90, 46, 138, 0.8);
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 600px) {
+  .select-wrapper {
+    padding: 30px 20px;
+    max-width: 90%;
+  }
+
+  .select-wrapper h1 {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+
+  .buttons button {
+    height: 45px;
+    font-size: 1rem;
+  }
 }

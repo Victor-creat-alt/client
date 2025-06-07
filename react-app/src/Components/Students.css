@@ -177,3 +177,63 @@ h1 {
     max-height: 500px;
   }
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 600px) {
+  .search-input {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .accordion-container {
+    max-width: 95%;
+    margin: 15px auto 30px auto;
+  }
+
+  .accordion-header {
+    font-size: 16px;
+    padding: 12px 18px;
+  }
+
+  .accordion-icon {
+    font-size: 20px;
+  }
+
+  .accordion-content {
+    padding: 12px 18px;
+    font-size: 14px;
+  }
+
+  .back-button {
+    font-size: 36px;
+    top: 8px;
+    left: 15px;
+  }
+
+  .remove-student-button {
+    padding: 12px 20px;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+
+  .students-table {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .students-table th, .students-table td {
+    padding: 8px 10px;
+    white-space: normal;
+  }
+
+  .compound-bar-graph-section {
+    width: 95%;
+    margin: 30px auto;
+  }
+}

@@ -32,3 +32,28 @@
 .info_container .info button:hover{
     background-color: rgba(0, 195, 255);
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 600px) {
+  .info_container {
+    margin-left: 10px;
+    height: auto;
+    padding: 20px 10px;
+    width: 95%;
+  }
+
+  .info_container .info h2 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+  }
+
+  .info_container .info p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+
+  .info_container .info_button {
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
+}

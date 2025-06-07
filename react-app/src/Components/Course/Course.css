@@ -57,3 +57,34 @@
   margin-top: auto;
   width: 100%;
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 600px) {
+  .course_card {
+    width: 100%;
+    min-height: auto;
+    margin-bottom: 15px;
+  }
+
+  .course_image img {
+    height: 180px;
+  }
+
+  .course_info {
+    padding: 15px;
+  }
+
+  .course_info h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+
+  .course_info p {
+    font-size: 0.9rem;
+    padding: 0 5px;
+  }
+
+  .course_meta {
+    font-size: 0.8rem;
+  }
+}

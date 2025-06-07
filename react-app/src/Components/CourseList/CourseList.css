@@ -105,4 +105,21 @@
       font-size: 2rem; /* Adjust heading size */
     }
   }
+
+  /* Additional Mobile Responsive Styles */
+  @media (max-width: 600px) {
+    .course_container {
+      padding: 10px;
+    }
+
+    .course_card {
+      width: 100%;
+      min-height: auto;
+    }
+
+    .course_wrapper h2 {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+    }
+  }
   

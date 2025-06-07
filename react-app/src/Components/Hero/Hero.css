@@ -58,4 +58,24 @@
       max-width: 100%; /* Removes the width limit for narrow devices */
     }
   }
+
+  /* Additional Mobile Responsive Styles */
+  @media (max-width: 600px) {
+    .hero_header {
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 0.9rem;
+      max-width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .hero_img {
+      width: 100%;
+      height: auto;
+      margin-top: 15px;
+    }
+  }
   

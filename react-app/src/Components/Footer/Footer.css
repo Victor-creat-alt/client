@@ -41,3 +41,26 @@
     background-color: grey;
     border: none;
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 600px) {
+  .footer {
+    padding: 40px 20px;
+  }
+
+  .footer_content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .content_left h2 {
+    font-size: 24px;
+  }
+
+  .social_icons img {
+    width: 30px;
+    margin-right: 10px;
+    margin-top: 15px;
+  }
+}
