@@ -6,7 +6,7 @@ import { useAuth } from '../../contexts/AuthContext';
 const CourseDetails = () => {
   const courses = [
     {
-      id: 1,
+      id: 7,
       title: 'Introduction to Python',
       overview: 'Begin your coding journey with Python',
       duration: '8 weeks',
@@ -15,7 +15,7 @@ const CourseDetails = () => {
       image: 'intro-python.jpeg',
     },
     {
-      id: 2,
+      id: 8,
       title: 'Web Development Fundamentals',
       overview: 'Master full-stack development from scratch',
       duration: '12 weeks',
@@ -24,7 +24,7 @@ const CourseDetails = () => {
       image: 'webdev.jpg',
     },
     {
-      id: 3,
+      id: 9,
       title: 'Data Structures and Algorithms',
       overview: 'Optimize your code and solve complex problems',
       duration: '14 weeks',
@@ -33,7 +33,7 @@ const CourseDetails = () => {
       image: 'data-structures.jpeg',
     },
     {
-      id: 4,
+      id: 10,
       title: 'Data Science Essentials',
       overview: 'Become proficient in data analysis and visualization',
       duration: '16 weeks',
@@ -42,7 +42,7 @@ const CourseDetails = () => {
       image: 'data-analysis.jpg',
     },
     {
-      id: 5,
+      id: 11,
       title: 'Machine Learning Basics',
       overview: 'Start your journey into the world of AI',
       duration: '20 weeks',
@@ -51,7 +51,7 @@ const CourseDetails = () => {
       image: 'machine-learning.jpeg',
     },
     {
-      id: 6,
+      id: 12,
       title: 'Advanced Java Programming',
       overview: 'Master Java for high-level software development',
       duration: '18 weeks',
@@ -60,7 +60,7 @@ const CourseDetails = () => {
       image: 'advanced-java.jpeg',
     },
     {
-      id: 7,
+      id: 13,
       title: 'Network Security',
       overview: 'Secure your systems from cyber threats',
       duration: '12 weeks',
@@ -69,7 +69,7 @@ const CourseDetails = () => {
       image: 'network-security.jpg',
     },
     {
-      id: 8,
+      id: 14,
       title: 'Cloud Computing',
       overview: 'Deploy and manage cloud infrastructure',
       duration: '8 weeks',
@@ -78,7 +78,7 @@ const CourseDetails = () => {
       image: 'cloud-computing.jpg',
     },
     {
-      id: 9,
+      id: 15,
       title: 'Mobile App Development',
       overview: 'Build cross-platform mobile applications',
       duration: '10 weeks',
@@ -87,7 +87,7 @@ const CourseDetails = () => {
       image: 'mobile-app.jpg',
     },
     {
-      id: 10,
+      id: 16,
       title: 'Game Development',
       overview: 'Create immersive games for multiple platforms',
       duration: '18 weeks',
@@ -96,7 +96,7 @@ const CourseDetails = () => {
       image: 'game-dev.jpg',
     },
     {
-      id: 11,
+      id: 17,
       title: 'Internet Of Things',
       overview: 'Build interconnected systems and smart devices',
       duration: '12 weeks',
@@ -105,7 +105,7 @@ const CourseDetails = () => {
       image: 'iot.jpg',
     },
     {
-      id: 12,
+      id: 18,
       title: 'Blockchain Technology',
       overview: 'Understand blockchain and decentralized apps',
       duration: '12 weeks',
@@ -114,7 +114,7 @@ const CourseDetails = () => {
       image: 'blockchain-technology.jpg',
     },
     {
-      id: 13,
+      id: 19,
       title: 'Computer Graphics Fundamentals',
       overview: 'Design realistic 3D models and animations',
       duration: '14 weeks',
@@ -123,7 +123,7 @@ const CourseDetails = () => {
       image: 'computer-graphics.jpeg',
     },
     {
-      id: 14,
+      id: 20,
       title: 'UI/UX Design Principles',
       overview: 'Design intuitive user interfaces',
       duration: '8 weeks',
@@ -132,7 +132,7 @@ const CourseDetails = () => {
       image: 'UI-UX.jpg',
     },
     {
-      id: 15,
+      id: 21,
       title: 'DevOps Engineering',
       overview: 'Implement CI/CD pipelines',
       duration: '10 weeks',
@@ -141,7 +141,7 @@ const CourseDetails = () => {
       image: 'devops.webp',
     },
     {
-      id: 16,
+      id: 22,
       title: 'Cybersecurity Basics',
       overview: 'Learn to protect systems and networks',
       duration: '14 weeks',
@@ -150,7 +150,7 @@ const CourseDetails = () => {
       image: 'cybersecurity.jpeg',
     },
     {
-      id: 17,
+      id: 23,
       title: 'Robotics Fundamentals',
       overview: 'Explore the world of robotics',
       duration: '15 weeks',
@@ -159,7 +159,7 @@ const CourseDetails = () => {
       image: 'robotics.jpg',
     },
     {
-      id: 18,
+      id: 24,
       title: 'Advanced C++ Programming',
       overview: 'Develop expertise in C++ for system-level programming',
       duration: '16 weeks',
