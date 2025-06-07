@@ -47,13 +47,13 @@ const LoginSignup = () => {
     let data;
     if (action === 'login') {
       data = {
+        name: formData.name,
         email: formData.email,
         password: formData.password,
         userType: userType,
       };
     } else {
       data = {
-        name: formData.name,
         email: formData.email,
         password: formData.password,
         userType: userType,
